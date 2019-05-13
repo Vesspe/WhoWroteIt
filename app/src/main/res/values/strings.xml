@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Who Wrote It?</string>
+    <string name="instructions">Enter a full or partial book name or text from the book. Click Search Books to find out who wrote the book.</string>
+    <string name="input_hint">Enter a Book Title</string>
+    <string name="button_text">Search Books</string>
+</resources>
