@@ -29,6 +29,41 @@ public class FetchBook extends AsyncTask<String, Void, String> {
     protected void onPostExecute(String s)
     {
         super.onPostExecute(s);
+        try {
+            JSONObject jsonObject = new JSONObject(s);
+            JSONArray itemsArray = jsonObject.getJSONArray("items");
 
+            //lets iterate throught results
+
+            for (int i=0; i<itemsArray.length();i++)
+            {
+                JSONObject book = itemsArray.getJSONObject(i); // current item
+                String title = null;
+                String authors = null;
+                JSONObject volumeInfo = book.getJSONObject("volumeInfo");
+
+                try{
+                    title = volumeInfo.getString("title");
+                    authors = volumeInfo.getString("authors");
+                }catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
+
+                if (title != null && authors != null)
+                {
+                    titleTextView.setText(title);
+                    authorTextView.setText(authors);
+                    return;
+                }
+            }
+            titleTextView.setText("No Results Found");
+            authorTextView.setText("");
+
+        } catch (Exception e) {
+            titleTextView.setText("No Results Found");
+            authorTextView.setText("");
+            e.printStackTrace();
+        }
     }
 }
